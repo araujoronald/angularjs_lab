@@ -1,0 +1,38 @@
+<html ng-app="myApp">
+	<head>
+		<title>Hello AngularJS</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<script type="text/javascript" src="js/_lib/angular.min.js"></script>
+	</head>
+
+	<body ng-controller="myController">
+		<h1>Estados e Capitais</h1>
+
+		<ul>
+			<li ng-repeat="state in states"> {{state.name}} - {{state.capital}}</li>
+		</ul>
+
+		<form ng-submit="addState()">
+			<input type="text" ng-model="estado"/>
+			<input type="text" ng-model="capital"/>
+			<input type="submit" value="Incluir"/>
+
+		</form>
+
+		<script type="text/javascript">
+			var myApp = angular.module("myApp", []);
+
+			myApp.controller("myController", function myController($scope){
+				$scope.states = [{name: "Bahia", capital: "Salvador"}];
+			
+				$scope.addState = function(){
+					$scope.states.push({name: $scope.estado, capital:$scope.capital});
+					$scope.estado = "";
+					$scope.capital = "";
+				}	
+
+			});
+
+		</script>
+	</body>
+</html>

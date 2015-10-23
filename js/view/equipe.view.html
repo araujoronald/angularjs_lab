@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+      <form novalidate name="equipeForm" ng-submit="adicionarEquipe(equipeForm.$valid)">
+          
+            <div class="form-group" 
+                 ng-class="{
+                    'has-error':equipeForm.nome.$invalid && !equipeForm.nome.$pristine, 
+                    'has-success':equipeForm.nome.$valid && !equipeForm.nome.$pristine,
+                    'has-feedback':!equipeForm.nome.$pristine}">
+                
+                <label class="control-label" for="nome">Nome</label>
+                <input name="nome" type="text" ng-model="formData.nome" class="form-control" ng-minlength="3" required describedby="nomeSucesso"/>
+                <span ng-show="equipeForm.nome.$valid && !equipeForm.nome.$pristine && equipeForm.sigla.$viewValue.length > 0" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>  
+                <span ng-show="equipeForm.nome.$invalid && !equipeForm.nome.$pristine" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>  
+            </div>
+          
+            <div class="form-group" 
+                 ng-class="{
+                    'has-error':equipeForm.sigla.$invalid && !equipeForm.sigla.$pristine, 
+                    'has-success':equipeForm.sigla.$valid && !equipeForm.sigla.$pristine && equipeForm.sigla.$viewValue,
+                    'has-feedback':!equipeForm.sigla.$pristine}">
+                <label for="sigla">Sigla</label>
+                <input sigla name="sigla" type="text" ng-model="formdata.sigla" class="form-control"/>
+                <span ng-show="equipeForm.sigla.$pending" class="glyphicon glyphicon-refresh form-control-feedback" aria-hidden="true"></span>  
+                <span ng-show="equipeForm.sigla.$valid && !equipeForm.sigla.$pristine && equipeForm.sigla.$viewValue.length > 0" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>  
+                <span ng-show="equipeForm.sigla.$invalid && !equipeForm.sigla.$pristine" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                <span ng-show="equipeForm.sigla.$pending" class="text-primary">Verificando sigla...</span>
+                <span ng-show="equipeForm.sigla.$invalid && !equipeForm.sigla.$pristine" class="text-danger glyphicon glyphicon-exclamation-sign"> Sigla já em uso</span>
+            </div>
+          
+            <div class="form-group" ng-class="{'has-error':equipeform.email.$invalid && !equipeForm.email.$pristine}">
+                <label for="email">E-mail</label>
+                <input name="email" type="email" ng-model="formData.email" class="form-control"/>
+            </div>
+          
+            <input type="submit" value="Incluir" class="btn btn-primary" ng-disabled="equipeForm.$invalid"/>
+            
+        </form>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+
+                
+                
