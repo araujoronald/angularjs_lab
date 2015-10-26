@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute', 'ui.bootstrap']);
 app.config(function($routeProvider) {
    $routeProvider
            .when("/", {
@@ -6,3 +6,4 @@ app.config(function($routeProvider) {
                controller: "EquipeController"
    });
 });
+
