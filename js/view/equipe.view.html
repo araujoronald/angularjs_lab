@@ -21,7 +21,7 @@
                     'has-success':equipeForm.sigla.$valid && !equipeForm.sigla.$pristine && equipeForm.sigla.$viewValue,
                     'has-feedback':!equipeForm.sigla.$pristine}">
                 <label for="sigla">Sigla</label>
-                <input sigla name="sigla" type="text" ng-model="formData.sigla" class="form-control"/>
+                <input sigla name="sigla" type="text" ng-model="formData.sigla" class="form-control" ng-minlength="3" ng-maxlength="3" required/>
                 <span ng-show="equipeForm.sigla.$pending" class="glyphicon glyphicon-refresh form-control-feedback" aria-hidden="true"></span>  
                 <span ng-show="equipeForm.sigla.$valid && !equipeForm.sigla.$pristine && equipeForm.sigla.$viewValue.length > 0" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>  
                 <span ng-show="equipeForm.sigla.$invalid && !equipeForm.sigla.$pristine" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>

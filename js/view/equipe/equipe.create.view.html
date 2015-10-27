@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+      <form novalidate name="equipeForm" ng-submit="adicionarEquipe(equipeForm.$valid)">
+          
+            <!-- NOME -->
+            <div class="form-group" 
+                 ng-class="{
+                    'has-error':isInvalidField(equipeForm.nome),
+                    'has-success':isValidField(equipeForm.nome),
+                    'has-feedback':!equipeForm.nome.$pristine}">
+                <label for="nome">Nome</label>
+                <input nomeequipe name="nome" type="text" ng-model="formData.nome" class="form-control" ng-minlength="3" ng-maxlength="200" required/>
+                <span ng-show="isPendingField(equipeForm.nome)" class="glyphicon glyphicon-refresh form-control-feedback" aria-hidden="true"></span>  
+                <span ng-show="isPendingField(equipeForm.nome)" class="text-primary">Verificando Nome...</span>
+                <span ng-show="isValidField(equipeForm.nome)" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>  
+                <span ng-show="isInvalidField(equipeForm.nome)" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                <div ng-show="!equipeForm.nome.$pristine" ng-messages="equipeForm.nome.$error" class="text-danger">
+                    <div ng-messages-include="mensagens"></div>
+                </div>
+            </div>
+          
+            <!-- SIGLA -->
+            <div class="form-group" 
+                 ng-class="{
+                    'has-error':isInvalidField(equipeForm.sigla),
+                    'has-success':isValidField(equipeForm.sigla),
+                    'has-feedback':!equipeForm.sigla.$pristine}">
+                <label for="sigla">Sigla</label>
+                <input siglaequipe name="sigla" type="text" ng-model="formData.sigla" class="form-control" ng-minlength="3" ng-maxlength="3" required/>
+                <span ng-show="isPendingField(equipeForm.sigla)" class="glyphicon glyphicon-refresh form-control-feedback" aria-hidden="true"></span>  
+                <span ng-show="isPendingField(equipeForm.sigla)" class="text-primary">Verificando Sigla...</span>
+                <span ng-show="isValidField(equipeForm.sigla)" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>  
+                <span ng-show="isInvalidField(equipeForm.sigla)" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                <div ng-show="!equipeForm.sigla.$pristine" ng-messages="equipeForm.sigla.$error" class="text-danger">
+                    <div ng-messages-include="mensagens"></div>
+                </div>
+            </div>
+          
+            <!-- EMAIL -->
+            <div class="form-group" ng-class="{'has-error':isInvalidField(equipeForm.email)}">
+                <label for="email">E-mail</label>
+                <input name="email" type="email" ng-model="formData.email" class="form-control"/>
+                <div ng-show="!equipeForm.email.$pristine" ng-messages="equipeForm.email.$error" class="text-danger">
+                    <div ng-messages-include="mensagens"></div>
+                </div>
+            </div>
+          
+            <!-- FUNDAÇÃO -->
+            <div class="form-group"
+                 ng-class="{'has-error':isInvalidField(equipeForm.data)}">
+                <label for="data">Data</label>
+                <input name="data" type="date" class="form-control" ng-model="formData.data"/>
+            </div>
+          
+            <!-- DIVISÃO -->
+            <div class="form-group"
+                ng-class="{'has-error':isInvalidField(equipeForm.divisao)}">
+                <label for="data">Divisão</label>
+                <div class="btn-group" uib-dropdown uib-keyboard-nav>
+                    <button id="simple-btn-keyboard-nav" type="button" class="btn btn-default" uib-dropdown-toggle>
+                        Selecione <span class="caret"></span>
+                    </button>
+                    <ul class="uib-dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+                        <li role="menuitem" ng-repeat="item in getDivisoes()">
+                            <a href="#">{{item}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+                
+            <div class="form-group"
+                ng-class="{
+                    'has-error':equipeForm.uf.$invalid && !equipeForm.uf.$pristine, 
+                    'has-success':equipeForm.uf.$valid && !equipeForm.uf.$pristine && equipeForm.uf.$viewValue,
+                    'has-feedback':!equipeForm.uf.$pristine}">
+                <label for="uf">Estado (UF)</label>
+                <input type="text" ng-model="formData.uf" uib-typeahead="uf for uf in getUfs() | filter:$viewValue | limitTo:8" class="form-control">
+            </div>
+          
+            <input type="submit" value="Incluir" class="btn btn-primary" ng-disabled="equipeForm.$invalid"/>
+  
+        </form>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+                
+                

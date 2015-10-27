@@ -12,4 +12,16 @@ angular.module("app").controller("EquipeController", function EquipeController($
     $scope.getUfs = function(){
         return ["Bahia", "DF", "Sergipe", "Alagoas", "Pernambuco"];
     };
+    
+    $scope.isInvalidField = function(field){
+        return field.$invalid && !field.$pristine;
+    };
+    
+    $scope.isValidField = function(field){
+        return field.$valid && !field.$pristine && field.$viewValue;
+    };
+    
+    $scope.isPendingField = function(field){
+        return field.$pending;
+    }
 });
