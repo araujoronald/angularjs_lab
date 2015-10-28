@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages']);
+var app = angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages', 'ngImgCrop']);
 app.config(function($routeProvider) {
    $routeProvider
            .when("/", {

@@ -52,12 +52,23 @@
                 <label for="data">Data</label>
                 <input name="data" type="date" class="form-control" ng-model="formData.data"/>
             </div>
+            
+            <!-- EMBLEMA -->
+            <div class="form-group">
+                <label for="emblema">Emblema</label>
+                <input type="file" id="fileInputEmblema" class="form-control"/>
+                <div class="cropArea" ng-show="emblema.length > 0">
+                    <img-crop image="emblema" result-image="emblemaRecortado" area-type="square" change-on-fly=true></img-crop>
+                </div>
+            </div>
           
             <!-- DIVISÃO -->
-            <div class="form-group"
-                ng-class="{'has-error':isInvalidField(equipeForm.divisao)}">
-                <label for="data">Divisão</label>
-                <div class="btn-group" uib-dropdown uib-keyboard-nav>
+            <div class="form-group">
+                <label for="divisao">Divisão</label>
+                <select name="divisao" id="divisao" ng-model="formData.divisao" class="form-control">
+                    <option ng-repeat="item in getDivisoes()" value="{{item}}">{{item}}</option>
+                </select>
+<!--                <div class="btn-group" uib-dropdown uib-keyboard-nav>
                     <button id="simple-btn-keyboard-nav" type="button" class="btn btn-default" uib-dropdown-toggle>
                         Selecione <span class="caret"></span>
                     </button>
@@ -66,7 +77,7 @@
                             <a href="#">{{item}}</a>
                         </li>
                     </ul>
-                </div>
+                </div>-->
             </div>
                 
             <div class="form-group"
@@ -77,6 +88,8 @@
                 <label for="uf">Estado (UF)</label>
                 <input type="text" ng-model="formData.uf" uib-typeahead="uf for uf in getUfs() | filter:$viewValue | limitTo:8" class="form-control">
             </div>
+            
+            
           
             <input type="submit" value="Incluir" class="btn btn-primary" ng-disabled="equipeForm.$invalid"/>
   
