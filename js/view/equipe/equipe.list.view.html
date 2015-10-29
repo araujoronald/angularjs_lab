@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      
+        <uib-alert ng-repeat="msg in mensagens" type="{{msg.tipo}}" close="fecharMensagem($index)">{{msg.mensagem}}</uib-alert>
+      
+        <div ng-repeat="equipe in equipes" class="table table-striped">
+            <div class="row success">
+                <div class="col-md-4">{{$index + 1}}</div>
+                <div class="col-md-4">
+                    <a href="#/equipe" ng-click="setEquipe(equipe)">
+                        {{equipe.sigla}}
+                    </a>
+                </div>
+                <div class="col-md-4">{{equipe.nome}}</div>
+            </div>
+        </div>
+        
+        <div ng-if="showDetail">
+            <div>{{equipe.nome}}</div>
+            <div>{{equipe.sigla}}</div>
+        </div>
+      
+  </div>
+  <div class="col-md-4"></div>
+</div>        

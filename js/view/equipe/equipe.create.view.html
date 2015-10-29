@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-md-4"></div>
   <div class="col-md-4">
+      
+      <uib-alert ng-repeat="msg in mensagens" type="{{msg.tipo}}" close="fecharMensagem($index)">{{msg.mensagem}}</uib-alert>
+      
       <form novalidate name="equipeForm" ng-submit="adicionarEquipe(equipeForm.$valid)">
           
             <!-- NOME -->
@@ -91,7 +94,7 @@
             
             
           
-            <input type="submit" value="Incluir" class="btn btn-primary" ng-disabled="equipeForm.$invalid"/>
+            <input type="submit" value="Incluir" class="btn btn-primary" />
   
         </form>
   </div>

@@ -1,8 +1,10 @@
 angular.module("app").controller("EquipeController", function EquipeController($scope, EquipeService){
     
+    $scope.formData = {};
     $scope.emblema = "";
     $scope.emblemaRecortado = "";
-    $scope.divisao = "";
+    $scope.showDetail = false;
+    $scope.equipe = "";
 
     var handleFileSelect = function(evt) {
         var file = evt.currentTarget.files[0];
@@ -16,13 +18,16 @@ angular.module("app").controller("EquipeController", function EquipeController($
     };
     
     angular.element(document.querySelector('#fileInputEmblema')).on('change', handleFileSelect);
-    
-    $scope.adicionarEquipe = function(isValid){
-        console.log("Passando pelo Controller");
-        console.log("O formulário é " + isValid);
+
+    $scope.adicionarEquipe = function(isValid){ 
+        $scope.formData.emblema = $scope.emblema;
         EquipeService.adicionarEquipe($scope.formData);
     };
     
+    EquipeService.listarEquipes().then(
+        function(response){
+            $scope.equipes = response.data;
+    })
     $scope.setDivisao = function(value){
         console.log("Valor: " + value);
     };
@@ -45,5 +50,10 @@ angular.module("app").controller("EquipeController", function EquipeController($
     
     $scope.isPendingField = function(field){
         return field.$pending;
-    }
+    };
+    
+    $scope.setEquipe = function(eqp){
+        $scope.equipe = angular.copy(eqp);
+        $scope.showDetail = true;
+    };
 });
