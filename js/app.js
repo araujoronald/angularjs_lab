@@ -12,7 +12,7 @@ app.config(function($routeProvider) {
 });
 
 app.constant("appConfig", {
-   "urlServico": "http://localhost/laravel_lab/public/" 
+   "urlServico": "http://localhost/laravelLab/public/" 
 });
 
 app.factory("mensagens", function($rootScope){    

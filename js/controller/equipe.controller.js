@@ -1,5 +1,6 @@
-angular.module("app").controller("EquipeController", function EquipeController($scope, EquipeService){
+angular.module("app").controller("EquipeController", function EquipeController($scope, $location, mensagens, EquipeService, appConfig){
     
+    $scope.appConfig = appConfig;
     $scope.formData = {};
     $scope.emblema = "";
     $scope.emblemaRecortado = "";
@@ -20,8 +21,13 @@ angular.module("app").controller("EquipeController", function EquipeController($
     angular.element(document.querySelector('#fileInputEmblema')).on('change', handleFileSelect);
 
     $scope.adicionarEquipe = function(isValid){ 
-        $scope.formData.emblema = $scope.emblema;
-        EquipeService.adicionarEquipe($scope.formData);
+        $scope.formData.emblema = $scope.emblemaRecortado;
+        EquipeService.adicionarEquipe($scope.formData).then(adicionarEquipeSucesso);
+    };
+    
+    var adicionarEquipeSucesso = function(data){
+        mensagens.success("Equipe registrada com sucesso");
+        $location.path('/equipe');
     };
     
     EquipeService.listarEquipes().then(
