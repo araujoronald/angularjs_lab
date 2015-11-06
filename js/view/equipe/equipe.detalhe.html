@@ -1,0 +1,7 @@
+<div>
+    <h1>{{equipe.nome}}</h1>
+    <p>{{equipe.sigla}}</p>
+    <p ng-if="equipe.emblema">
+        <img ng-src="{{appConfig.urlServico}}{{equipe.emblema}}"/>
+    </p>
+</div>

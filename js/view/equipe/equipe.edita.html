@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+      
+      <form novalidate name="form" ng-submit="form.$valid && equipeEditCtrl.adicionarEquipe()" ng-controller="EquipeEditController as equipeEditCtrl">
+          
+            <!-- NOME -->
+            <div class="form-group" 
+                 ng-class="{
+                    'has-error':equipeEditCtrl.isInvalidField(form.nome),
+                    'has-success':equipeEditCtrl.isValidField(form.nome),
+                    'has-feedback':!form.nome.$pristine}">
+                <label for="nome">Nome</label>
+                <input nomeequipe name="nome" type="text" ng-model="equipeEditCtrl.equipe.nome" class="form-control" ng-minlength="3" ng-maxlength="200" required/>
+                <span ng-show="equipeEditCtrl.isPendingField(form.nome)" class="glyphicon glyphicon-refresh form-control-feedback" aria-hidden="true"></span>  
+                <span ng-show="equipeEditCtrl.isPendingField(form.nome)" class="text-primary">Verificando Nome...</span>
+                <span ng-show="equipeEditCtrl.isValidField(form.nome)" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>  
+                <span ng-show="equipeEditCtrl.isInvalidField(form.nome)" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                <div ng-show="!form.nome.$pristine" ng-messages="form.nome.$error" class="text-danger">
+                    <div ng-messages-include="mensagens"></div>
+                </div>
+            </div>
+          
+            <!-- SIGLA -->
+            <div class="form-group" 
+                 ng-class="{
+                    'has-error':equipeEditCtrl.isInvalidField(form.sigla),
+                    'has-success':equipeEditCtrl.isValidField(form.sigla),
+                    'has-feedback':!form.sigla.$pristine}">
+                <label for="sigla">Sigla</label>
+                <input siglaequipe name="sigla" type="text" ng-model="equipeEditCtrl.equipe.sigla" class="form-control" ng-minlength="3" ng-maxlength="3" required/>
+                <span ng-show="equipeEditCtrl.isPendingField(form.sigla)" class="glyphicon glyphicon-refresh form-control-feedback" aria-hidden="true"></span>  
+                <span ng-show="equipeEditCtrl.isPendingField(form.sigla)" class="text-primary">Verificando Sigla...</span>
+                <span ng-show="equipeEditCtrl.isValidField(form.sigla)" class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>  
+                <span ng-show="equipeEditCtrl.isInvalidField(form.sigla)" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                <div ng-show="!form.sigla.$pristine" ng-messages="form.sigla.$error" class="text-danger">
+                    <div ng-messages-include="mensagens"></div>
+                </div>
+            </div>
+          
+            <!-- EMAIL -->
+            <div class="form-group" ng-class="{'has-error':equipeEditCtrl.isInvalidField(form.email)}">
+                <label for="email">E-mail</label>
+                <input name="email" type="email" ng-model="equipeEditCtrl.equipe.email" class="form-control"/>
+                <div ng-show="!form.email.$pristine" ng-messages="form.email.$error" class="text-danger">
+                    <div ng-messages-include="mensagens"></div>
+                </div>
+            </div>
+          
+            <!-- FUNDAÇÃO -->
+            <div class="form-group"
+                 ng-class="{'has-error':equipeEditCtrl.isInvalidField(form.data)}">
+                <label for="data">Data</label>
+                <input name="data" type="date" class="form-control" ng-model="equipeEditCtrl.equipe.dataFundacao"/>
+            </div>
+            
+            <!-- EMBLEMA -->
+            <div class="form-group">
+                <label for="emblema">Emblema</label>
+                <input type="file" id="fileInputEmblema" class="form-control"/>
+                <div class="cropArea" ng-show="emblema.length > 0">
+                    <img-crop image="emblema" result-image="emblemaRecortado" area-type="square" change-on-fly=true></img-crop>
+                </div>
+            </div>
+          
+            <!-- DIVISÃO -->
+            <div class="form-group">
+                <label for="divisao">Divisão</label>
+                <select name="divisao" id="divisao" ng-model="equipeEditCtrl.equipe.divisao" class="form-control">
+                    <option ng-repeat="item in equipeEditCtrl.getDivisoes()" value="{{item}}">{{item}}</option>
+                </select>
+            </div>
+                
+            <div class="form-group"
+                ng-class="{
+                    'has-error':equipeEditCtrl.isInvalidField(form.uf),
+                    'has-success':equipeEditCtrl.isValidField(form.uf),
+                    'has-feedback':!form.uf.$pristine}">
+                <label for="uf">Estado (UF)</label>
+                <input name="uf" type="text" ng-model="equipeEditCtrl.equipe.uf" uib-typeahead="uf for uf in equipeEditCtrl.getUfs() | filter:$viewValue | limitTo:8" class="form-control">
+            </div>
+
+            <input type="submit" value="Incluir" class="btn btn-primary" />
+            <a href="#/equipe" class="btn btn-danger">Cancelar</a>
+  
+        </form>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+                
+                

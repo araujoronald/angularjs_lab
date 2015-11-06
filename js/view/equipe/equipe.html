@@ -1,0 +1,12 @@
+ <uib-alert ng-repeat="msg in mensagens" type="{{msg.tipo}}" close="fecharMensagem($index)">{{msg.mensagem}}</uib-alert>
+<div class="row">
+    <div class="col-md-4">       
+        <equipe-lista></equipe-lista>   
+        <a href="#/equipe/nova" class="btn btn-primary">Adicionar</a>
+    </div>
+    
+    <div class="col-md-8 jumbotron">  
+        <div ng-include="'js/view/equipe/equipe.detalhe.html'" ng-if="showDetail"> </div>
+    </div>
+    
+</div>        
