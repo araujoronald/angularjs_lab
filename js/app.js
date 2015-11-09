@@ -1,15 +1,27 @@
-angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages', 'ngImgCrop', 'satellizer']);
-angular.module('app')
-    .config(function($routeProvider, $authProvider) {
-       $routeProvider
-               .when("/equipe", {
-                   templateUrl: "js/view/equipe/equipe.html",
-                   controller: "EquipeController"
-                })
-                .when("/equipe/nova", {
-                   templateUrl: "js/view/equipe/equipe.edita.html",
-                   controller: "EquipeEditController"
-                })
+angular.module('app', ['ngRoute', 'ui.router', 'ui.bootstrap', 'ngMessages', 'ngImgCrop', 'satellizer'])
+    .config(function($routeProvider, $stateProvider, $urlRouterProvider, $authProvider) {
+        
+        $authProvider.loginUrl = '/api/autenticacao'; 
+
+        $urlRouterProvider.otherwise('/equipe');
+        
+        $routeProvider
+            .when("/auth/login", {
+                templateUrl: "js/view/auth/auth.login.html",
+                controller: "AutenticacaoController"
+            })
+            .when("/equipe", {
+                templateUrl: "js/view/equipe/equipe.html",
+                controller: "EquipeController"
+            })
+            .when("/equipe/nova", {
+                templateUrl: "js/view/equipe/equipe.edita.html",
+                controller: "EquipeEditController"
+            })
+            .when("/usuario/registrar", {
+                templateUrl: "js/view/auth/auth.registrar.html",
+                controller: "AutenticacaoController"
+            })
     })
 
     .constant("appConfig", {

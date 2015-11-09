@@ -1,15 +1,20 @@
 (function() {
 
-angular.module("app").controller("AutenticacaoController", function AutenticacaoController($scope, $location, $http, appConfig, mensagens){
+angular.module("app").controller("AutenticacaoController", function AutenticacaoController($auth, $state, $location, $http, appConfig, mensagens){
     
     this.usuario = {};
     this.credencial = {};
 
     this.registrar = function(){ 
-        $http.post(appConfig.urlServico + "auth/registrar", usuario)
+        $http.post(appConfig.urlServico + "usuario/registrar", this.usuario)
             .success(registrarSucesso)
-            .catch(mensagens.catch("Não foi possível realizar o cadastro do usuário"));
-        
+            .catch(mensagens.catch("Não foi possível realizar o cadastro do usuário")); 
+    };
+    
+    this.login = function(){
+        $auth.login(this.credencial).then(function(data){
+            $state.go('equipe', {});
+        });
     };
     
     this.registrarSucesso = function(response){
