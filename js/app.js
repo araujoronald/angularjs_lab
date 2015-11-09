@@ -1,6 +1,6 @@
-angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages', 'ngImgCrop']);
+angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages', 'ngImgCrop', 'satellizer']);
 angular.module('app')
-    .config(function($routeProvider) {
+    .config(function($routeProvider, $authProvider) {
        $routeProvider
                .when("/equipe", {
                    templateUrl: "js/view/equipe/equipe.html",
