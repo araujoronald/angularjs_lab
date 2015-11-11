@@ -1,9 +1,29 @@
-angular.module('app', ['ngRoute', 'ui.router', 'ui.bootstrap', 'ngMessages', 'ngImgCrop', 'satellizer'])
-    .config(function($routeProvider, $stateProvider, $urlRouterProvider, $authProvider) {
+angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages', 'ngImgCrop', 'satellizer', 'MessageCenterModule'])
+    .config(function($routeProvider, $authProvider, $provide, $httpProvider) {
         
-        $authProvider.loginUrl = '/api/autenticacao'; 
-
-        $urlRouterProvider.otherwise('/equipe');
+        
+        function redirectWhenLoggedOut($q, $injector, $location) {
+            return {
+                responseError: function(rejection) {
+                    this.rejection = rejection;
+                    var rejectionReasons = ['token_not_provided', 'token_expired', 'token_absent', 'token_invalid'];
+                    angular.forEach(rejectionReasons, function(value, key) {
+                        if(this.rejection.data.error === value) {
+                            localStorage.removeItem('user');
+                            $location.path('/auth/login');
+                        }
+                    });
+                    return $q.reject(rejection);
+                }
+            }
+        }
+        
+        $provide.factory('redirectWhenLoggedOut', redirectWhenLoggedOut);
+        $httpProvider.interceptors.push('redirectWhenLoggedOut');
+        
+        
+        $authProvider.loginUrl = 'http://localhost/laravel_lab/public/api/autenticacao'; 
+        $authProvider.tokenPrefix = '';
         
         $routeProvider
             .when("/auth/login", {
@@ -22,6 +42,9 @@ angular.module('app', ['ngRoute', 'ui.router', 'ui.bootstrap', 'ngMessages', 'ng
                 templateUrl: "js/view/auth/auth.registrar.html",
                 controller: "AutenticacaoController"
             })
+            .otherwise({
+                redirectTo: '/'
+            });
     })
 
     .constant("appConfig", {
@@ -44,6 +67,23 @@ angular.module('app', ['ngRoute', 'ui.router', 'ui.bootstrap', 'ngMessages', 'ng
                 return $rootScope.mensagens = [{mensagem: mensagem, tipo: "success"}]; 
             }
         };
-    });
+    })
+    
+    .run(function($rootScope, $location){
+        $rootScope.$on('$routeChangeStart', function(event, next, current) {
+            var user = JSON.parse(localStorage.getItem('user'));
+            if(user) {
+                $rootScope.authenticated = true;
+                $rootScope.currentUser = user;
+            } 
+            
+            
+            if(next.originalPath === '/auth/login'){
+                event.preventDefault();
+                $location.path('/equipe');
+            }
+        });
+    })
+;
 
 

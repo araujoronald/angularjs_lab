@@ -1,12 +1,13 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
+        <mc-messages></mc-messages>
         <form novalidate name="form" ng-submit="form.$valid && autenticacaoCtrl.login()" ng-controller="AutenticacaoController as autenticacaoCtrl">
 
             <!-- EMAIL -->
             <div class="form-group" ng-class="{'has-error':autenticacaoCtrl.isInvalidField(form.email)}">
                 <label for="email">E-mail</label>
-                <input name="email" type="email" ng-model="autenticacaoCtrl.usuario.email" class="form-control"/>
+                <input name="email" type="email" ng-model="autenticacaoCtrl.credencial.email" class="form-control"/>
                 <div ng-show="!form.email.$pristine" ng-messages="form.email.$error" class="text-danger">
                     <div ng-messages-include="mensagens"></div>
                 </div>
@@ -15,7 +16,7 @@
             <!-- SENHA -->
             <div class="form-group" ng-class="{'has-error':autenticacaoCtrl.isInvalidField(form.senha)}">
                 <label for="senha">Senha</label>
-                <input name="senha" type="password" ng-model="autenticacaoCtrl.usuario.senha" class="form-control"/>
+                <input name="senha" type="password" ng-model="autenticacaoCtrl.credencial.password" class="form-control"/>
                 <div ng-show="!form.senha.$pristine" ng-messages="form.senha.$error" class="text-danger">
                     <div ng-messages-include="mensagens"></div>
                 </div>

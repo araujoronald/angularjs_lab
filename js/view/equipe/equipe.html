@@ -1,4 +1,8 @@
- <uib-alert ng-repeat="msg in mensagens" type="{{msg.tipo}}" close="fecharMensagem($index)">{{msg.mensagem}}</uib-alert>
+<mc-messages></mc-messages>
+<div ng-if="authenticated">
+    <h5>Welcome, {{currentUser.nome}}</h5>
+    <button class="btn btn-danger" ng-click='logout()'>Sair</button>
+</div>
 <div class="row">
     <div class="col-md-4">       
         <equipe-lista></equipe-lista>   

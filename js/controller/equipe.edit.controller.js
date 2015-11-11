@@ -1,7 +1,8 @@
 (function() {
 
-angular.module("app").controller("EquipeEditController", function EquipeEditController($scope, $location, mensagens, EquipeService){
+angular.module("app").controller("EquipeEditController", function EquipeEditController($scope, $location, messageCenterService, EquipeService){
     
+    var msg = messageCenterService;
     this.equipe = {};
     $scope.emblema = "";
     $scope.emblemaRecortado = "";
@@ -32,13 +33,12 @@ angular.module("app").controller("EquipeEditController", function EquipeEditCont
     };
     
     this.adicionarEquipeSucesso = function(response){
-        console.log("lascou em banda");
-        //mensagens.success("Equipe registrada com sucesso");
-        //$location.path('/equipe');
+        msg.add('success', "Equipe registrada com sucesso");
+        $location.path('/equipe');
     };
     
     this.adicionarEquipeErro = function(response){
-        console.log("deu pau");
+        msg.add('danger', "Erro ao registrar equipe");
     };
     
     this.getDivisoes = function(){
