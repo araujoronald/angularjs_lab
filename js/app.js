@@ -38,6 +38,10 @@ angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages', 'ngImgCrop', 'sa
                 templateUrl: "js/view/equipe/equipe.edita.html",
                 controller: "EquipeEditController"
             })
+            .when("/equipe/edita/:id", {
+                templateUrl: "js/view/equipe/equipe.edita.html",
+                controller: "EquipeEditController"
+            })
             .when("/usuario/registrar", {
                 templateUrl: "js/view/auth/auth.registrar.html",
                 controller: "AutenticacaoController"
@@ -75,13 +79,12 @@ angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages', 'ngImgCrop', 'sa
             if(user) {
                 $rootScope.authenticated = true;
                 $rootScope.currentUser = user;
-            } 
+            }            
             
-            
-            if(next.originalPath === '/auth/login'){
-                event.preventDefault();
-                $location.path('/equipe');
-            }
+//            if(next.originalPath === '/auth/login'){
+//                event.preventDefault();
+//                $location.path('/equipe');
+//            }
         });
     })
 ;

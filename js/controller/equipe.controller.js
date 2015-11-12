@@ -17,5 +17,6 @@ angular.module("app").controller("EquipeController", function EquipeController(
     
     $scope.logout = function(){
         AutenticacaoService.logout();
+        $location.path('/auth/login');
     };
 });

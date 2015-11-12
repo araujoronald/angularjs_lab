@@ -4,13 +4,14 @@ angular.module('app').directive('siglaequipe', function($q, $timeout, EquipeServ
         require: 'ngModel',
 
         link: function(scope, element, attr, ctrl) {
+       
             ctrl.$asyncValidators.siglaequipe = function(modelValue, viewValue) {
                 if (ctrl.$isEmpty(modelValue)) {
                     return $q.when();
                 }
 
                 var def = $q.defer();
-                $timeout(function() {           
+                $timeout(function() { 
                     if (EquipeService.siglaValida(modelValue)) {
                         def.resolve();
                     } else {

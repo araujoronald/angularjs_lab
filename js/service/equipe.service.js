@@ -2,7 +2,17 @@ angular.module("app").service("EquipeService", function EquipeService(appConfig,
     this.adicionarEquipe = function(equipe){        
         return $http.post(appConfig.urlServico + "equipe", equipe)
                 .catch(mensagens.catch("Não foi possível incluir a Equipe"));
-    }    
+    }
+    
+    this.editarEquipe = function(equipe){        
+        return $http.put(appConfig.urlServico + "equipe/" + equipe.id, equipe)
+                .catch(mensagens.catch("Não foi possível editar a Equipe"));
+    }
+    
+     this.buscarEquipe = function(idEquipe){
+        return $http.get(appConfig.urlServico + "equipe/" + idEquipe + "/edit")
+                .catch(mensagens.catch("Não foi possível incluir a Equipe"));
+    }
     
     this.listarEquipes = function(){
         return $http.get(appConfig.urlServico + "equipe")

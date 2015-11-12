@@ -5,13 +5,12 @@ angular.module('app').directive('nomeequipe', function($q, $timeout, EquipeServi
 
         link: function(scope, element, attr, ctrl) {
             ctrl.$asyncValidators.nomeequipe = function(modelValue, viewValue) {
-                if (ctrl.$isEmpty(modelValue)) {
+                if (ctrl.$isEmpty(modelValue) && !scope.modoEdicao) {
                     return $q.when();
                 }
 
                 var def = $q.defer();
                 $timeout(function() {  
-                    console.log("Consultando: " + modelValue);
                     if (EquipeService.nomeValido(modelValue)) {
                         def.resolve();
                     } else {

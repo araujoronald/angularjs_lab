@@ -1,11 +1,23 @@
 (function() {
 
-angular.module("app").controller("EquipeEditController", function EquipeEditController($scope, $location, messageCenterService, EquipeService){
+angular.module("app").controller("EquipeEditController", function EquipeEditController($scope, $location, $routeParams, messageCenterService, EquipeService){
     
     var msg = messageCenterService;
-    this.equipe = {};
+    $scope.modoEdicao = false;
+    $scope.equipe = {};
     $scope.emblema = "";
     $scope.emblemaRecortado = "";
+    var idEquipe = $routeParams.id;
+    
+    if(idEquipe){
+        EquipeService.buscarEquipe(idEquipe).then(
+            function(response){
+                $scope.equipe = response.data;
+                console.log('ativando');
+                $scope.modoEdicao = true;
+            }
+        );
+    }
 
     this.handleFileSelect = function(evt) {
         var file = evt.currentTarget.files[0];
@@ -22,12 +34,11 @@ angular.module("app").controller("EquipeEditController", function EquipeEditCont
 
     this.adicionarEquipe = function(){ 
         if($scope.emblema.length > 0){
-            this.equipe.emblema = $scope.emblemaRecortado;
+            $scope.equipe.emblema = $scope.emblemaRecortado;
         }
-        console.log(this.equipe);
-        EquipeService.adicionarEquipe(this.equipe)
+        EquipeService.adicionarEquipe($scope.equipe)
                 .then(this.adicionarEquipeSucesso, this.adicionarEquipeErro);
-        this.equipe = {};
+        $scope.equipe = {};
         $scope.emblemaRecortado = "";
         $scope.emblema = "";
     };
@@ -39,6 +50,26 @@ angular.module("app").controller("EquipeEditController", function EquipeEditCont
     
     this.adicionarEquipeErro = function(response){
         msg.add('danger', "Erro ao registrar equipe");
+    };
+    
+    this.editarEquipe = function(){ 
+        if($scope.emblema.length > 0){
+            $scope.equipe.emblema = $scope.emblemaRecortado;
+        }
+        EquipeService.editarEquipe($scope.equipe)
+                .then(this.editarEquipeSucesso, this.editarEquipeErro);
+    };
+    
+    this.editarEquipeSucesso = function(response){
+        msg.add('success', "Equipe atualizada com sucesso");
+        $scope.equipe = {};
+        $scope.emblemaRecortado = "";
+        $scope.emblema = "";
+        $location.path('/equipe');
+    };
+    
+    this.editarEquipeErro = function(response){
+        msg.add('danger', "Erro ao atualizar a equipe");
     };
     
     this.getDivisoes = function(){
