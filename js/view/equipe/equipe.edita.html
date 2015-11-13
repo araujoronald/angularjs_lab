@@ -2,7 +2,7 @@
   <div class="col-md-4"></div>
   <div class="col-md-4">
       
-      <form novalidate name="form" ng-controller="EquipeEditController as equipeEditCtrl">
+      <form novalidate name="form" ng-controller="EquipeEditController as equipeEditCtrl" ng-submit="form.$valid && equipeEditCtrl.inserirOuAtualizar()">
           
             <!-- NOME -->
             <div class="form-group" 
@@ -80,8 +80,8 @@
                 <input name="uf" type="text" ng-model="equipe.uf" uib-typeahead="uf for uf in equipeEditCtrl.getUfs() | filter:$viewValue | limitTo:8" class="form-control">
             </div>
 
-            <input ng-show="!modoEdicao" type="submit" value="Incluir" class="btn btn-primary" ng-submit="form.$valid && equipeEditCtrl.adicionarEquipe()" />
-            <input ng-show="modoEdicao" type="submit" value="Atualizar" class="btn btn-primary"  ng-submit="form.$valid && equipeEditCtrl.editarEquipe()"/>
+            <input ng-show="!modoEdicao" type="submit" value="Incluir" class="btn btn-primary"/>
+            <input ng-show="modoEdicao" type="submit" value="Atualizar" class="btn btn-primary"/>
             <a href="#/equipe" class="btn btn-danger">Cancelar</a>
   
         </form>

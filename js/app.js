@@ -79,12 +79,9 @@ angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages', 'ngImgCrop', 'sa
             if(user) {
                 $rootScope.authenticated = true;
                 $rootScope.currentUser = user;
-            }            
-            
-//            if(next.originalPath === '/auth/login'){
-//                event.preventDefault();
-//                $location.path('/equipe');
-//            }
+            } else {
+                $location.path('/auth/login');
+            }
         });
     })
 ;

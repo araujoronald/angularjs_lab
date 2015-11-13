@@ -32,6 +32,14 @@ angular.module("app").controller("EquipeEditController", function EquipeEditCont
     
     angular.element(document.querySelector('#fileInputEmblema')).on('change', this.handleFileSelect);
 
+    this.inserirOuAtualizar = function(){
+        if($scope.modoEdicao){
+            this.editarEquipe();
+        } else {
+            this.adicionarEquipe();
+        }
+    };
+    
     this.adicionarEquipe = function(){ 
         if($scope.emblema.length > 0){
             $scope.equipe.emblema = $scope.emblemaRecortado;
