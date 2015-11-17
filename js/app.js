@@ -25,6 +25,13 @@ angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages', 'ngImgCrop', 'sa
         $authProvider.loginUrl = 'http://localhost/laravel_lab/public/api/autenticacao'; 
         $authProvider.tokenPrefix = '';
         
+        
+        $authProvider.google({
+            clientId: '571732240769-3trpjtbatlm1n98v0c50m2u5rqhgfoep.apps.googleusercontent.com',
+            url: 'http://localhost/laravel_lab/public/api/autenticacao/google',
+            redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host
+        });
+        
         $routeProvider
             .when("/auth/login", {
                 templateUrl: "js/view/auth/auth.login.html",

@@ -22,7 +22,11 @@
                 </div>
             </div>
 
-            <input type="submit" value="Autenticar" class="btn btn-primary" />
+            <input type="submit" value="Autenticar" class="btn btn-block btn-primary" />
+            <button type="button" class="btn btn-block btn-google-plus" ng-click="autenticacaoCtrl.autenticacaoOAuth('google')">
+                <i class="ion-social-google"></i>
+                Login com o Google
+            </button>
         </form>
 
     </div>

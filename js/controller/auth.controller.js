@@ -37,7 +37,28 @@ angular.module("app").controller("AutenticacaoController", function Autenticacao
                 $rootScope.currentUser = response.data.user;
                 $location.path('/equipe');
             });
-    };  
+    };
+    
+    this.autenticacaoOAuth = function(provider){
+        $auth.authenticate(provider)
+            .then(function(response){
+                return $http.get(appConfig.urlServico + 'api/autenticacao/usuario');
+            })
+            .catch(function(response){
+                if(response.status === 401){
+                    msg.add('danger', 'Usuário ou senha inválidos');
+                } else {
+                   msg.add('danger', 'Falha na autenticação');
+                }
+            }).then(function(response){
+                console.log(response);
+                var user = JSON.stringify(response.data.user);
+                localStorage.setItem('user', user);
+                $rootScope.authenticated = true;
+                $rootScope.currentUser = response.data.user;
+                $location.path('/equipe');
+            });
+    };
 
     this.isInvalidField = function(field){
         return field.$invalid && !field.$pristine;
