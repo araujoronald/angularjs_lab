@@ -32,6 +32,12 @@ angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages', 'ngImgCrop', 'sa
             redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host
         });
         
+        $authProvider.github({
+            clientId: 'bbb8298bf84e51ae6e16',
+            url: 'http://localhost/laravel_lab/public/api/autenticacao/github',
+            redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host
+        });
+        
         $routeProvider
             .when("/auth/login", {
                 templateUrl: "js/view/auth/auth.login.html",
