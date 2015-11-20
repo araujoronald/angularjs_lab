@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages', 'ngImgCrop', 'satellizer', 'MessageCenterModule'])
+angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngImgCrop', 'satellizer', 'MessageCenterModule'])
     .config(function($routeProvider, $authProvider, $provide, $httpProvider) {
         
         
@@ -68,24 +68,6 @@ angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngMessages', 'ngImgCrop', 'sa
         "urlServico": "http://localhost/laravel_lab/public/" 
     })
 
-    .factory("mensagens", function($rootScope){    
-        $rootScope.fecharMensagem = function(index) {
-            $rootScope.mensagens.splice(index, 1);
-        };
-
-        return {
-            catch: function(mensagem){
-                return function(motivo){
-                    $rootScope.mensagens = [{mensagem: mensagem, tipo: "danger"}];
-                };
-            },
-
-            success: function(mensagem){
-                return $rootScope.mensagens = [{mensagem: mensagem, tipo: "success"}]; 
-            }
-        };
-    })
-    
     .run(function($rootScope, $location){
         $rootScope.$on('$routeChangeStart', function(event, next, current) {
             var user = JSON.parse(localStorage.getItem('user'));

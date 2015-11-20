@@ -1,23 +1,23 @@
-angular.module("app").service("EquipeService", function EquipeService(appConfig, mensagens, $http){
+angular.module("app").service("EquipeService", function EquipeService(appConfig, $http){
     this.adicionarEquipe = function(equipe){        
-        return $http.post(appConfig.urlServico + "equipe", equipe)
-                .catch(mensagens.catch("Não foi possível incluir a Equipe"));
-    }
+        return $http.post(appConfig.urlServico + "equipe", equipe);
+    };
     
     this.editarEquipe = function(equipe){        
-        return $http.put(appConfig.urlServico + "equipe/" + equipe.id, equipe)
-                .catch(mensagens.catch("Não foi possível editar a Equipe"));
-    }
+        return $http.put(appConfig.urlServico + "equipe/" + equipe.id, equipe);
+    };
     
      this.buscarEquipe = function(idEquipe){
-        return $http.get(appConfig.urlServico + "equipe/" + idEquipe + "/edit")
-                .catch(mensagens.catch("Não foi possível incluir a Equipe"));
-    }
+        return $http.get(appConfig.urlServico + "equipe/" + idEquipe + "/edit");
+    };
     
     this.listarEquipes = function(){
-        return $http.get(appConfig.urlServico + "equipe")
-                .catch(mensagens.catch("Não foi possível incluir a Equipe"));
-    }
+        return $http.get(appConfig.urlServico + "equipe");
+    };
+    
+    this.removerEquipe = function(idEquipe){
+        return $http.delete(appConfig.urlServico + "equipe/" + idEquipe);
+    };
     
     this.nomeValido = function(valor){
         console.log("Nome: " + valor);
