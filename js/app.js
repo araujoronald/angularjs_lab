@@ -32,6 +32,12 @@ angular.module('app', ['ngRoute', 'ui.bootstrap', 'ngImgCrop', 'satellizer', 'Me
             redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host
         });
         
+        $authProvider.facebook({
+            clientId: '1523141704677755',
+            url: 'http://localhost/laravel_lab/public/api/autenticacao/facebook',
+            redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host
+        });
+        
         $authProvider.github({
             clientId: 'bbb8298bf84e51ae6e16',
             url: 'http://localhost/laravel_lab/public/api/autenticacao/github',
